@@ -5,7 +5,7 @@ include_once('curl.php');
 include_once('email.php');
 include_once('json.php');
 
-const HOUR = 3600;
+const HOUR = 3;
 
 try {
     $timeStart = time();
@@ -20,6 +20,7 @@ try {
         }
     }
 } catch (Exception $e) {
-    Email::sendByEmail(['message' => $e->getMessage(), 'code' =>$e->getCode()]);
+    $email = new Email();
+    $email->sendByEmail(['message' => $e->getMessage(), 'code' =>$e->getCode()]);
 }
 

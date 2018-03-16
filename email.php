@@ -6,6 +6,15 @@ include_once 'codeError.php';
 class Email
 {
     const MY_EMAIL = 'morgan.zaharov@yandex.ru';
+    const CODE_ERROR_10 = 10;
+    const CODE_ERROR_15 = 15;
+    const CODE_ERROR_20 = 20;
+
+    private $responseMessageError = [
+        self::CODE_ERROR_10 => 'Не получилось расшифровать строку',
+        self::CODE_ERROR_15 => 'Нет такого метода',
+        self::CODE_ERROR_20 => 'Пустое значение параметра message'
+    ];
 
     /**
      * send message about this exception text
@@ -14,7 +23,7 @@ class Email
      * @return bool
      * @throws phpmailerException
      */
-    public static function sendByEmail(array $array): bool
+    public function sendByEmail(array $array): bool
     {
         $subject = 'Test Daemon : Zakharov A.M.';
 
@@ -31,10 +40,21 @@ class Email
         $mail->addAddress(self::MY_EMAIL);
         $mail->isHTML(true);
         $mail->Subject = $subject;
-        $message = CodeError::getMessageError($array);
+        $message = $this->getMessageError($array);
 
         $mail->Body = "Error message: {$message};  <br> Code: {$array['code']};";
 
         return $mail->send();
+    }
+
+    /**
+     * Get message by code error
+     *
+     * @param array $array
+     * @return string
+     */
+    public  function getMessageError(array $array): string
+    {
+        return $this->responseMessageError[$array['code']] ?? $array['message'];
     }
 }
