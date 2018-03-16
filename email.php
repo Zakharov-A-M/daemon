@@ -1,6 +1,7 @@
 <?php
 include_once 'lib/phpmailer/class.phpmailer.php';
 include_once 'lib/phpmailer/class.smtp.php';
+include_once 'codeError.php';
 
 class Email
 {
@@ -15,9 +16,7 @@ class Email
      */
     public static function sendByEmail(array $array): bool
     {
-        $message = $array['message'];
-        $subject = 'Zakharov A.M.  ';
-        $headers = 'Test Daemon    ';
+        $subject = 'Test Daemon : Zakharov A.M.';
 
         $mail = new PHPMailer;
         $mail->isSMTP();
@@ -31,19 +30,9 @@ class Email
         $mail->setFrom('zakharov19951@yandex.by');
         $mail->addAddress(self::MY_EMAIL);
         $mail->isHTML(true);
-        $mail->Subject = $headers . $subject;
+        $mail->Subject = $subject;
+        $message = CodeError::getMessageError($array);
 
-        switch ($array['code']) {
-            case 15:
-                $message = 'Нет такого метода';
-                break;
-            case 20:
-                $message = 'Пустое значение параметра message';
-                break;
-            case 10:
-                $message = 'Не получилось расшифровать строку';
-                break;
-        }
         $mail->Body = "Error message: {$message};  <br> Code: {$array['code']};";
 
         return $mail->send();

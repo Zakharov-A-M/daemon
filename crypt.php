@@ -25,10 +25,11 @@ class Crypt
     private function encrypt(string $string, string $key): string
     {
         $string = mt_rand() . ':' . $string . ':' . mt_rand();
-        for($i = 0; $i < strlen($string); $i++) {
+        for ($i = 0; $i < strlen($string); $i++) {
             $k = $key . substr($string, $i + 1) . ($i + 1) . "";
-            for($j = 0; $j < strlen($k); $j++)
+            for ($j = 0; $j < strlen($k); $j++) {
                 $string[$i] = $string[$i] ^ $k[$j];
+            }
         }
         return $this->base64encode($string);
     }
