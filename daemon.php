@@ -3,7 +3,6 @@
 include_once('crypt.php');
 include_once('curl.php');
 include_once('email.php');
-include_once('json.php');
 
 const HOUR = 3600;
 
