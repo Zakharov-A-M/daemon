@@ -44,7 +44,7 @@ class Crypt
      */
     private function base64encode(string  $data): string
     {
-        return rtrim(strtru(base64_encode($data), '+/', '-_'), '=');
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
 
 }

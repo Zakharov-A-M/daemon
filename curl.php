@@ -13,7 +13,7 @@ class Curl
      * @return array $responseInfo
      * @throws Exception
      */
-    public function performRequest(array $array)
+    public function performRequest(array $array): array
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, self::URL);
