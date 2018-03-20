@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Crypt
 {
     /**
@@ -42,7 +44,7 @@ class Crypt
      */
     private function base64encode(string  $data): string
     {
-        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+        return rtrim(strtru(base64_encode($data), '+/', '-_'), '=');
     }
 
 }

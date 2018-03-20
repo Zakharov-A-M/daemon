@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Curl
 {
     const URL = 'https://syn.su/testwork.php';

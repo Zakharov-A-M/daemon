@@ -1,7 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
 include_once 'lib/phpmailer/class.phpmailer.php';
 include_once 'lib/phpmailer/class.smtp.php';
-include_once 'codeError.php';
 
 class Email
 {
