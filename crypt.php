@@ -13,38 +13,12 @@ class Crypt
      */
     public function cryptXor(string $str, string $key): string
     {
-        $outText = $this->encrypt($str, $key);
-        return base64_encode($outText);
-    }
+        $string = '';
+        $key = substr($key, 0, strlen($str));
 
-    /**
-     * Encrypt for algorithm XOR
-     *
-     * @param string $string
-     * @param string $key
-     * @return string
-     */
-    private function encrypt(string $string, string $key): string
-    {
-        $string = mt_rand() . ':' . $string . ':' . mt_rand();
-        for ($i = 0; $i < strlen($string); $i++) {
-            $k = $key . substr($string, $i + 1) . ($i + 1) . "";
-            for ($j = 0; $j < strlen($k); $j++) {
-                $string[$i] = $string[$i] ^ $k[$j];
-            }
+        for ($i = 0; $i < strlen($str); $i++) {
+            $string .= $str[$i] ^ $key[$i % strlen($key)];
         }
-        return $this->base64encode($string);
+        return base64_encode($string);
     }
-
-    /**
-     * Base64 encode for algorithm XOR
-     *
-     * @param string $data
-     * @return string
-     */
-    private function base64encode(string  $data): string
-    {
-        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
-    }
-
 }

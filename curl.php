@@ -10,7 +10,7 @@ class Curl
      * Send http request on this site
      *
      * @param $array $array
-     * @return array $responseInfo
+     * @return resource $responseInfo
      * @throws Exception
      */
     public function performRequest(array $array): array
@@ -39,6 +39,6 @@ class Curl
             throw new Exception('', $responseInfo['errorCode']);
         }
 
-        return $responseInfo['response'];
+        return $responseInfo;
     }
 }

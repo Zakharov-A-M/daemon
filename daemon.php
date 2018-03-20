@@ -12,9 +12,9 @@ try {
     $crypt =  new Crypt();
     while (true) {
         $responseArray = $response->performRequest(['method' => 'get']);
-        $output = $crypt->cryptXor($responseArray['message'], $responseArray['key']);
+        $output = $crypt->cryptXor($responseArray['response']['message'], $responseArray['response']['key']);
         if ((time() - $timeStart) >= HOUR) {
-            $response->performRequest(['method' => 'update', 'message' => $output]);
+           $str =  $response->performRequest(['method' => 'update', 'message' => $output]);
             $timeStart = time();
         }
     }
