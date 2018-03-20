@@ -16,7 +16,6 @@ try {
         if ((time() - $timeStart) >= HOUR) {
            $response->performRequest(['method' => 'update', 'message' => $output]);
            $timeStart = time();
-           die
         }
     }
 } catch (Exception $e) {
