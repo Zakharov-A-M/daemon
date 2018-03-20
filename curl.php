@@ -29,10 +29,11 @@ class Curl
         }
         curl_close($curl);
 
-        if (Json::isJson($response)) {
+        $responseInfo = json_decode($response, true);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
             throw new Exception('Invalid json format');
         }
-        $responseInfo = json_decode($response, true);
 
         if (!empty($responseInfo['errorCode'])) {
             throw new Exception('', $responseInfo['errorCode']);
