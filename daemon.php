@@ -4,7 +4,7 @@ include_once('crypt.php');
 include_once('curl.php');
 include_once('email.php');
 
-const HOUR = 3600;
+const HOUR = 3;
 
 try {
     $timeStart = time();
@@ -14,8 +14,8 @@ try {
         $responseArray = $response->performRequest(['method' => 'get']);
         $output = $crypt->cryptXor($responseArray['response']['message'], $responseArray['response']['key']);
         if ((time() - $timeStart) >= HOUR) {
-           $str =  $response->performRequest(['method' => 'update', 'message' => $output]);
-            $timeStart = time();
+           $response->performRequest(['method' => 'update', 'message' => $output]);
+           $timeStart = time();
         }
     }
 } catch (Exception $e) {
